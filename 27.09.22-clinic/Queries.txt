@@ -6,7 +6,7 @@ pracownik.imie LIKE '%n';
 
 2. Wyświetl wszystkie miasta z tabel pracownik i pacjent, użyj takiego sformułowania, aby miasta się nie powtarzały, ułóż wynik alfabetycznie.
 
-SELECT pacjent.miasto, pracownik.miasto 
+SELECT DISTINCT pacjent.miasto, pracownik.miasto 
 FROM pacjent, wizyta, pracownik WHERE
 pacjent.id_pacjent = wizyta.id_pacjent AND
 wizyta.id_pracownik = pracownik.id_pracownik
