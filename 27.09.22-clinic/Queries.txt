@@ -1,25 +1,57 @@
-1. Wyświetl nazwę stanowiska, imie, nazwisko, email, PESEL, Telefon i nr_konta_bankowego z tabeli pracownik tych pracowników, których imię kończy się na literę a.
+1. Wyświetl nazwę stanowiska, imie, nazwisko, email, PESEL, Telefon i nr_konta_bankowego z tabeli pracownik tych pracowników, których imię kończy się na literę n.
 
+SELECT stanowisko.nazwa, pracownik.imie, pracownik.nazwisko, pracownik.email, pracownik.telefon, pracownik.nr_konta_bankowego 
+FROM pracownik, stanowisko WHERE
+pracownik.imie LIKE '%n';
 
 2. Wyświetl wszystkie miasta z tabel pracownik i pacjent, użyj takiego sformułowania, aby miasta się nie powtarzały, ułóż wynik alfabetycznie.
 
+SELECT pacjent.miasto, pracownik.miasto 
+FROM pacjent, wizyta, pracownik WHERE
+pacjent.id_pacjent = wizyta.id_pacjent AND
+wizyta.id_pracownik = pracownik.id_pracownik
+ORDER BY pacjent.miasto, pracownik.miasto ASC;
 
 3. Wyświetl średnią płacę lekarzy w przychodni jako "Średnia płaca" (użyj AVG).
 
+SELECT AVG(pensja) AS 'Średnia pensja' FROM  pracownik;
 
 4. Wyświetl dane pacjentów, którzy mają usługę Badanie wstępne po 1 września 2022.
 
+SELECT pacjent.imie, pacjent.nazwisko, pacjent.adres, pacjent.telefon
+FROM pacjent, wizyta WHERE
+pacjent.id_pacjent = wizyta.id_pacjent AND
+wizyta.data_wizyty >= '2022-09-01' AND
+wizyta.opis = 'Curabitur vitae est sodales, cursus quam vitae, dapibus nunc. Nullam consectetur purus vel nisl consectetur venenatis. Mauris sagittis dolor nec ornare suscipit. Sed efficitur quam erat, sed fringilla felis sollicitudin eu. In accumsan sodales volutpat. Pellentesque eu vehicula massa, vel mollis turpis. Etiam pulvinar, nisi et ornare ullamcorper, quam ipsum aliquam libero, et tempor mi lectus sit amet orci. Ut id tempor ante. Cras sit amet sagittis sapien. Cras sed tempus odio, eget varius est. Praesent lacus est, mollis vitae ante non, consequat pharetra orci. Cras eget tellus volutpat, euismod libero quis, imperdiet turpis. Ut ac pharetra ante, ut imperdiet nunc. Aenean bibendum scelerisque pretium. In consectetur hendrerit metus sed iaculis. Curabitur et ante leo.';
 
-5. Wyświetl minimalną i maksymalną cenę usługi w specjalizacji pulmonologia (użyj MAX i MIN).
+5. Wyświetl minimalną i maksymalną cenę usługi za operacje (użyj MAX i MIN).
 
+SELECT MAX(usluga.cena), MIN(usluga.cena) 
+FROM usluga WHERE
+usluga.nazwa = 'Operacja';
 
 6. Wyświetl wszystkie dane wizyty pacjentów z województwa łódzkiego.
 
+SELECT wizyta.id_wizyta, wizyta.id_pracownik, wizyta.id_pacjent, wizyta.id_usluga, wizyta.data_wizyty, wizyta.opis
+FROM pacjent, wizyta, wojewodztwo WHERE
+pacjent.id_pacjent = wizyta.id_pacjent AND
+pacjent.id_wojewodztwa = wojewodztwo.id_wojewodztwo AND
+wojewodztwo.nazwa = 'Łódzkie';
 
 7. Wyświetl wszystko z tabeli usługi, których cena wynosi od 80zł do 120 zł, wyniki posortuj alfabetycznie po nazwie.
 
+SELECT * FROM usluga WHERE cena
+BETWEEN 40000 and 100000
+ORDER BY nazwa ASC;
 
 8. Wyświetl tytuł z tabeli ogłoszenia wraz z imieniem i nazwiskiem autora oraz jego stanowiskiem.
 
+SELECT ogloszenie.tytul, pracownik.imie, pracownik.nazwisko, stanowisko.nazwa
+FROM ogloszenie, pracownik, stanowisko WHERE
+ogloszenie.id_pracownik = pracownik.id_pracownik AND
+pracownik.id_stanowisko = stanowisko.id_stanowisko;
 
-9. Wypisz imie, nazwisko, pensje i telefon 5 pracowników, których pensja jest najwyższa (użyj LIMIT).
+9. Wypisz imie, nazwisko, pensje i telefon pracownika, których pensja jest najwyższa (użyj LIMIT).
+
+SELECT imie, nazwisko, pensja, telefon 
+FROM pracownik ORDER BY pensja DESC LIMIT 5;
