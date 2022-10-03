@@ -1,0 +1,25 @@
+1. Wyświetl nazwę stanowiska, imie, nazwisko, email, PESEL, Telefon i nr_konta_bankowego z tabeli pracownik tych pracowników, których imię kończy się na literę a.
+
+
+2. Wyświetl wszystkie miasta z tabel pracownik i pacjent, użyj takiego sformułowania, aby miasta się nie powtarzały, ułóż wynik alfabetycznie.
+
+
+3. Wyświetl średnią płacę lekarzy w przychodni jako "Średnia płaca" (użyj AVG).
+
+
+4. Wyświetl dane pacjentów, którzy mają usługę Badanie wstępne po 1 września 2022.
+
+
+5. Wyświetl minimalną i maksymalną cenę usługi w specjalizacji pulmonologia (użyj MAX i MIN).
+
+
+6. Wyświetl wszystkie dane wizyty pacjentów z województwa łódzkiego.
+
+
+7. Wyświetl wszystko z tabeli usługi, których cena wynosi od 80zł do 120 zł, wyniki posortuj alfabetycznie po nazwie.
+
+
+8. Wyświetl tytuł z tabeli ogłoszenia wraz z imieniem i nazwiskiem autora oraz jego stanowiskiem.
+
+
+9. Wypisz imie, nazwisko, pensje i telefon 5 pracowników, których pensja jest najwyższa (użyj LIMIT).
