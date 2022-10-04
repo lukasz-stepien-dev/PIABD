@@ -9,23 +9,80 @@ skladki.data_oplacenia > '2021-10-04';
 	
 2. Wypisz wszystkie osoby które kupi³y polisê w miesi¹cach parzystych
 
-
+SELECT osoby.nazwisko, osoby.imie, osoby.miasto, osoby.id
+FROM osoby, ubezpieczenia, skladki WHERE
+osoby.id = ubezpieczenia.os_id AND
+ubezpieczenia.skladka = skladki.ub_polisa AND
+MONTH(skladki.miesiac) % 2 = 0;
 	
-3. Wypisz wszystkie sk³adki których termin p³atnoœci koñczy siê w tym miesi¹cu wraz z informacj¹ u którego agenta  by³y wykupione
+3. Wypisz wszystkie sk³adki których termin p³atnoœci jest pomiedzy 10.04.2023 i 10.04.2024 wraz z informacj¹ u którego agenta  by³y wykupione
 
-
+SELECT skladki.ub_polisa, skladki.termin_platnosci, agenci.id, agenci.imie, agenci.nazwisko
+FROM skladki, ubezpieczenia, agenci WHERE
+skladki.ub_polisa = ubezpieczenia.skladka AND
+ubezpieczenia.ag_id = agenci.id AND
+skladki.termin_platnosci BETWEEN '2023-10-04' AND '2024-10-04';
 	
-4. Wypisz wszystkie osoby które s¹ z miasta Kraków i  maj¹ nazwisko na K, B lub M
+4. Wypisz wszystkie osoby które s¹ z miasta Owando i maj¹ nazwisko na K, B lub M
 
-
+SELECT *
+FROM osoby WHERE
+miasto = 'Owando' AND
+(nazwisko LIKE 'K%' OR
+nazwisko LIKE 'B%' OR
+nazwisko LIKE 'M%');
 	
-5. Wypisz wszystkie osoby które maj¹ inicja³y KW lub KZ
+5. Wypisz wszystkie osoby które maj¹ inicja³y KA lub KM
 
-
+SELECT * FROM osoby
+WHERE imie LIKE 'K%' AND 
+(nazwisko LIKE 'A%' OR nazwisko LIKE 'M%');
 	
 6. Wypisz wszystkich agentów wraz z informacj¹ jaki wariant ubezpieczenia sprzedaj¹
 
-
+SELECT agenci.id, agenci.imie, agenci.nazwisko, ubezpieczenia.wariant 
+FROM agenci, ubezpieczenia WHERE
+agenci.id = ubezpieczenia.ag_id;
 	
 7. Stwórz 5 w³asnych zapytañ ³¹cz¹cych minimum 3 tabele
 
+	- Wyswietl agentow, wariant ubezpieczenia i osoby, które pochodz¹ z miast na litera A
+
+	SELECT agenci.imie, agenci.nazwisko, ubezpieczenia.wariant, osoby.imie, osoby.nazwisko, osoby.miasto
+	FROM agenci, ubezpieczenia, osoby WHERE
+	agenci.id = ubezpieczenia.ag_id AND
+	ubezpieczenia.os_id = osoby.id AND
+	osoby.miasto LIKE 'A%';
+
+	- Wyœwietl agentów, data_od i data_oplacenia od 2018.
+
+	 SELECT agenci.imie, agenci.nazwisko, ubezpieczenia.data_od, skladki.data_oplacenia
+	FROM agenci, ubezpieczenia, skladki WHERE
+	agenci.id = ubezpieczenia.ag_id AND
+	ubezpieczenia.skladka = skladki.ub_polisa AND
+	skladki.data_oplacenia >= '2018-01-01';
+
+	- Wyœwietl Miasto, imie i nazwisko agenta jak i data_do, gdzie wariant to 7.
+
+	SELECT agenci.imie, agenci.nazwisko, osoby.miasto, ubezpieczenia.data_do 
+	FROM agenci, ubezpieczenia, osoby WHERE
+	agenci.id = ubezpieczenia.ag_id AND
+	ubezpieczenia.os_id = osoby.id AND
+	ubezpieczenia.wariant = 7;
+
+	- Wyœwietl agentów i miasta zaczynaj¹ce siê na F lub koñcz¹ce siê na  Z.
+
+	SELECT agenci.imie, agenci.nazwisko, osoby.miasto 
+	FROM agenci, ubezpieczenia, osoby WHERE
+	agenci.id = ubezpieczenia.ag_id AND
+	ubezpieczenia.os_id = osoby.id AND
+	(osoby.miasto LIKE 'F%' OR
+	osoby.miasto LIKE 'Z%');
+
+	- Wyœwietl osoby i skladki, które maj¹ termin p³atnoœci do 2025
+
+	SELECT osoby.id, osoby.nazwisko, osoby.imie, skladki.termin_platnosci 
+	FROM skladki, ubezpieczenia, osoby WHERE
+	skladki.ub_polisa = ubezpieczenia.skladka AND
+	ubezpieczenia.os_id = osoby.id AND
+	skladki.termin_platnosci BETWEEN '2022-10-04' AND '2025-01-01';
