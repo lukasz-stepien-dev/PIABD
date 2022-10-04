@@ -1,0 +1,13 @@
+1. Wypisz wszystkich agentów którzy w ostatnim roku sprzedali polisê
+	
+2. Wypisz wszystkie osoby które kupi³y polisê w miesi¹cach parzystych
+	
+3. Wypisz wszystkie sk³adki których termin p³atnoœci koñczy siê w tym miesi¹cu wraz z informacj¹ u którego agenta  by³y wykupione
+	
+4. Wypisz wszystkie osoby które s¹ z miasta Kraków i  maj¹ nazwisko na K, B lub M
+	
+5. Wypisz wszystkie osoby które maj¹ inicja³y KW lub KZ
+	
+6. Wypisz wszystkich agentów wraz z informacj¹ jaki wariant ubezpieczenia sprzedaj¹
+	
+7. Stwórz 5 w³asnych zapytañ ³¹cz¹cych minimum 3 tabele
