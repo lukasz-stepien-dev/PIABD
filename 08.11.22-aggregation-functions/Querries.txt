@@ -1,0 +1,19 @@
+1.
+SELECT MIN(wykladowcy.stawka_godzinowa) AS MinimalnaStawka FROM `wykladowcy` WHERE 1;
+SELECT MAX(wykladowcy.stawka_godzinowa) AS MaksymalnaStawka FROM `wykladowcy` WHERE 1;
+
+2.
+SELECT ROUND(AVG(wykladowcy.stawka_godzinowa), 2) AS SredniaStawka FROM `wykladowcy` WHERE 1;
+
+3.
+SELECT ROUND(AVG(przedmioty.cena_egzaminu), 2) AS SredniaCeba, MIN(przedmioty.cena_egzaminu) AS NajnizszaCena, MAX(przedmioty.cena_egzaminu) AS NajwiekszaCena FROM `przedmioty` WHERE 1
+
+4. 
+SELECT COUNT(studenci.rok_studiow) AS Studenci FROM `studenci` WHERE studenci.rok_studiow = 4;
+
+5.
+SELECT COUNT(egzaminy.czy_zdal) AS LiczbaZdanychEgzaminow FROM `egzaminy` WHERE egzaminy.czy_zdal = 1;
+
+6.
+SELECT ROUND(AVG(wykladowcy.liczba_godzin_miesiecznie), 2) AS SredniaPrzepracowanychGodzinWMiesiacu FROM `wykladowcy` WHERE 1;
+
