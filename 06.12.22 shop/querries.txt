@@ -1,0 +1,73 @@
+1. ZnajdŸ wszystkich pracowników którzy s¹ kobietami, mieszaj¹ w £odzi i obs³ugiwali zamówienie w ostatnich 12 miesi¹cach licz¹c od dziœ.
+
+SELECT pracownicy.Nazwisko, pracownicy.Imie, pracownicy.Plec, pracownicy.Miasto, zamowienia.DataZmowienia FROM
+zamowienia, pracownicy WHERE
+zamowienia.NrPracownika = pracownicy.NrPracownika AND
+pracownicy.Plec = 'F' AND
+pracownicy.Miasto = "Chicago" AND
+zamowienia.DataZmowienia BETWEEN '2019-12-06' AND '2022-12-06';
+
+2. Wylicz œredni¹ cenê jednostkow¹ produktów znajduj¹cych siê na magazynie oraz podaj max i min cenê.
+
+SELECT ROUND(AVG(produkty.CenaJadnostkowa), 2) AS "Œrednia cena jednostkowa",
+MIN(produkty.CenaJadnostkowa) AS "Minimalna cena jednostkowa",
+MAX(produkty.CenaJadnostkowa) AS "Maksymalna cena jednostkowa" 
+FROM produkty WHERE produkty.StanMagazynu > 0;
+
+3. ZnajdŸ klientow którzy nie podali któreœ z swoich danych
+
+SELECT * FROM klienci WHERE
+klienci.NazwaFirmy IS NULL OR
+klienci.Kraj IS NULL OR
+klienci.Adres IS NULL OR
+klienci.Miasto IS NULL OR
+klienci.KodPocztowy IS NULL OR
+klienci.Telefon IS NULL OR
+klienci.Fax IS NULL;
+
+4. Policz ilu klientów ma firma z podzia³em na miasta
+
+SELECT COUNT(klienci.KodKlienta) AS "Liczba klientow w danych miescie", klienci.Miasto FROM klienci GROUP BY klienci.Miasto;
+
+5. Policz ilu dostawców ma firma.
+
+SELECT COUNT(dostawcy.NrDostawcy) AS "Liczba dostawców" FROM dostawcy;
+
+6. Wylicz ile produktów zosta³o wycofanych
+
+SELECT COUNT(produkty.NrProduktu) AS "Liczba wycofanych produktów" FROM produkty WHERE produkty.Wycofany = true;
+
+7. Wyœwietl informacjê o klientach, zamówieniach i pracownikach którzy dokonali zamówieñ lub je obs³u¿yli w ostatnim 3 latach
+
+SELECT klienci.NazwaFirmy, klienci.Kraj, klienci.Adres, pracownicy.Nazwisko,
+pracownicy.Imie, pracownicy.Miasto, zamowienia.DataZmowienia FROM
+klienci, pracownicy, zamowienia WHERE
+klienci.KodKlienta = zamowienia.KodKlienta AND
+zamowienia.NrPracownika = pracownicy.NrPracownika AND zamowienia.DataZmowienia
+BETWEEN "2019-12-06" AND "2022-12-06"
+
+8. Wyœwietl ilu jest pracowników w firmie z podzia³em na p³eæ
+
+SELECT COUNT(pracownicy.NrPracownika) AS "Liczba pracowników", pracownicy.Plec 
+FROM `pracownicy` GROUP BY pracownicy.Plec;
+
+9. Wyœwietl max i minimaln¹ cenê zamówienia jakiej dokonali klienci z Vinkkilä
+
+SELECT klienci.NazwaFirmy, klienci.Miasto,
+ROUND(AVG(opisyzamowien.CenaJednostkowa), 2) AS "Srednia cena jednostkowa",
+MAX(opisyzamowien.CenaJednostkowa) AS "Maksymalna cena jednostkowa",
+MIN(opisyzamowien.CenaJednostkowa) AS "Minimalna cena jednostkowa" 
+FROM klienci, zamowienia, opisyzamowien WHERE
+klienci.KodKlienta = zamowienia.KodKlienta AND
+zamowienia.NrZamiowienia = opisyzamowien.NrZamowienia AND
+klienci.Miasto = "Vinkkilä";
+
+10. Wyœwietl dane dostawcy który obs³ugiwa³ klienta o id 3
+
+SELECT dostawcy.NazwaFirmy AS Dostawca, dostawcy.Adres, klienci.NazwaFirmy AS Klient 
+FROM klienci, zamowienia, opisyzamowien, produkty, dostawcy WHERE
+klienci.KodKlienta = zamowienia.KodKlienta AND
+zamowienia.NrZamiowienia = opisyzamowien.NrZamowienia AND
+opisyzamowien.NrProduktu = produkty.NrProduktu AND
+produkty.NrDostawcy = dostawcy.NrDostawcy AND
+klienci.KodKlienta = 3;
