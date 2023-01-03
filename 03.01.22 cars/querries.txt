@@ -1,0 +1,18 @@
+1. Wypisz wszystkie samochody które s¹ marki BMW lub AUDI
+SELECT * FROM `samochody` WHERE marka = 'AUDI' OR marka = 'BMW';
+
+2. Wypisz wszystkich klientów którzy mieszkaj¹ w £odzi
+SELECT * FROM `klienci` WHERE miasto = '£ódŸ';
+
+3. Wypisz wszystkie typy samochodów których cena za dobê waha siê od 100 do 200 z³
+SELECT samochody.nr_rejestracyjny, samochody.marka, samochody.model, szczegoly_zaplaty.cena_za_dobe FROM szczegoly_zaplaty, zamowienia, samochody WHERE samochody.nr_rejestracyjny = zamowienia.nr_rejestracyjny AND
+szczegoly_zaplaty.id_zaplaty = zamowienia.id_zaplaty AND
+cena_za_dobe BETWEEN 100 AND 200;
+
+4. Wypisz wszystkie numery rejestracyjne pojazdów które zosta³y wypo¿yczone w miesi¹cu maj
+SELECT samochody.nr_rejestracyjny FROM zamowienia, samochody WHERE
+samochody.nr_rejestracyjny = zamowienia.nr_rejestracyjny AND
+zamowienia.data_wyp BETWEEN '2023-05-01' AND '2023-05-31';
+
+5. Wypisz wszystkie samochody które nie maj¹ podanego roku produkcji.
+SELECT * FROM `samochody` WHERE rok_produkcji IS NULL;
