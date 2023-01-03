@@ -1,0 +1,42 @@
+Przepraszam, że tak późno wysyłam ale kompletnie zapomniałem.
+
+1. Wyświetl wszystkie książki które przeczytały osoby o inicjałach MK.
+
+SELECT ksiazka.tytul FROM ksiazka, egzemplarze, wypozyczenia,czytelnicy WHERE
+wypozyczenia.id_czyt = czytelnicy.id_czyt AND
+wypozyczenia.sygnatura = egzemplarze.sygnatura AND
+egzemplarze.ksiazka = ksiazka.ksiazka AND
+czytelnicy.nazwisko LIKE 'K%' AND
+czytelnicy.imie LIKE 'M%';
+
+2. Wyświetl wszystkich czytelników (imię, nazwisko, email, telefon i pesel).
+
+SELECT czytelnicy.imie, czytelnicy.nazwisko, czytelnicy.pesel, maile.mail, telefony.nr_tel 
+FROM czytelnicy, maile, telefony WHERE
+telefony.id_czyt = czytelnicy.id_czyt AND
+maile.id_czyt = czytelnicy.id_czyt;
+
+3. Wyświetl wszystkich czytelników którzy wypożyczyli książkę z  działu 'dla dzieci'.
+
+SELECT czytelnicy.nazwisko, czytelnicy.imie, czytelnicy.adres 
+FROM czytelnicy, wypozyczenia, egzemplarze, ksiazka, dzialy WHERE
+czytelnicy.id_czyt = wypozyczenia.id_czyt AND
+wypozyczenia.sygnatura = egzemplarze.sygnatura AND
+egzemplarze.ksiazka = ksiazka.ksiazka AND
+ksiazka.dzial = dzialy.dzial AND
+dzialy.dzial = 'dla dzieci';
+
+4.Wyświetl wszystkie osoby które wypożyczyły więcej niż 20 książki.
+
+SELECT czytelnicy.nazwisko, czytelnicy.imie 
+FROM czytelnicy, wypozyczenia, liczba_wyp WHERE
+czytelnicy.id_czyt = wypozyczenia.id_czyt AND
+czytelnicy.id_czyt = liczba_wyp.id_czyt AND
+liczba_wyp.liczba > 20;
+
+5. Wyświetl wszystkie książki wraz z informacją o jej sygnaturze oraz działem.
+
+SELECT ksiazka.tytul, egzemplarze.sygnatura, dzialy.dzial 
+FROM egzemplarze, ksiazka, dzialy WHERE
+egzemplarze.ksiazka = ksiazka.ksiazka AND
+ksiazka.dzial = dzialy.dzial;
