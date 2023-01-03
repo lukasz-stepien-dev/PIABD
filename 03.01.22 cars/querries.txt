@@ -16,3 +16,5 @@ zamowienia.data_wyp BETWEEN '2023-05-01' AND '2023-05-31';
 
 5. Wypisz wszystkie samochody które nie maj¹ podanego roku produkcji.
 SELECT * FROM `samochody` WHERE rok_produkcji IS NULL;
+
+https://imgur.com/a/PpbTu9r
