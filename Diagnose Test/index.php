@@ -20,13 +20,7 @@
 $result = $conn->query("SELECT * FROM Users");
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        echo "<section style='margin: 40px 0'>
-            Imię: {$row['Name']}<br>
-            Nazwisko: {$row['Surname']}<br>
-            Wiek: {$row['Age']}<br>
-            <form action='update.php' method='post'>
-                <input type='text' name='name' value='{$row["Name"]}'><br>
-                <input type='text' name='surname' value='{$row["Surname"]}'><br>
+        echo "Surname\"]}'><br>
                 <input type='submit' name='update' value='Aktualizuj'>
                 <input type='submit' name='delete' value='Usuń'>
                 <input type='number' name='id' value='{$row['ID']}' style='opacity: 0'>
